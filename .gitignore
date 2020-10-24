@@ -1,3 +1,9 @@
+#test dirs
+/server/*/
+
+#virtual env
+/python_env/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
