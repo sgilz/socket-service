@@ -3,31 +3,27 @@ class Parser:
     """
     Mainly made for managing commands sintax
     """
-    def __init__(self, line):
-        self.__line = line.strip()
-
-    def parse(self):
+    def parse(self, line):
         """
         Validates if the typed line is a valid command
         """
         zero_args_commands = r"(help|list||quit)"
-        one_arg_commands = r"((content|create|drop)(\s+\S+))"
-        two_args_commands = r"((delete|down|up)(\s+\S){2})"
-        valid_line = rf"({zero_args_commands}|{one_arg_commands}|{two_args_commands})"
-        return True if re.fullmatch(valid_line, self.__line) else False
+        one_arg_commands = r"(content|create|drop)"
+        two_args_commands = r"(delete|down|up)"
+        valid_line = rf"({zero_args_commands}|{one_arg_commands}(\s+\w+)|{two_args_commands}(\s+\w+)(\s+\S+$))"
+        return True if re.fullmatch(valid_line, line) else False
 
-    
-    def instruction(self):
+    def instruction(self, line):
         """
         Returns the command field.
         This should be called only when the command is already parsed.
         """
-        return self.__line.split()[0]
+        return line.split()[0]
 
-    def args(self):
+    def args(self, line):
         """
         Returns the command args into a tuple.
         This should be called only when the command is already parsed.
         """
-        args = tuple(self.__line.split())
+        args = tuple(line.split())
         return args[1:] if len(args) > 1 else ()
