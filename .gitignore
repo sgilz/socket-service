@@ -1,5 +1,6 @@
 #test dirs
 /server/*/
+/client/*/
 
 #virtual env
 /python_env/
